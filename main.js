@@ -13,25 +13,29 @@ for (let index = 1; index < 120; index++) {
 
 function filtrar(e) {
     contenedorPokemons.innerHTML = ""
+    let pokemonesFiltrados= []
     const id = e.srcElement.id
     if (id == "ver-todos") {
-        pokemonesIniciales.forEach((pokemon)=>{
-            agregar(pokemon)})
+        pokemonesFiltrados = pokemonesIniciales
     }else{
-        pokemonesIniciales.forEach(pokemon => {
+        pokemonesFiltrados = pokemonesIniciales.filter((pokemon)=>{
             const type1 = pokemon.types[0].type.name;
             const type2 = pokemon.types[1]?.type.name || type1;
             if(type1 == id || type2 == id){
-                agregar(pokemon)
+                return pokemon
             }
-                
-        }) 
+            
+        })
+        
     }
+    pokemonesFiltrados.forEach(pokemon => {
+        agregar(pokemon)
+    }) 
 }
     
 function agregar(pokemon) {
     let pokeId = pokemon.id
-    
+
     if (pokeId<10) {
         pokeId = "00"+`${pokeId}`
     }else if (pokeId<100){
